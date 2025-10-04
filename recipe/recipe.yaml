@@ -1,8 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
 schema_version: 1
 
 context:
   name: django-mptt2
-  version: 0.2.1
+  version: "0.2.1"
 
 package:
   name: ${{ name|lower }}
@@ -24,19 +25,14 @@ requirements:
     - setuptools
   run:
     - django
-    - python >=${{ python_min }}
+    - python >=${{ python_min }},<4.0
 
 tests:
   - python:
       imports:
         - mptt2
       python_version: ${{ python_min }}.*
-  - requirements:
-      run:
-        - pip
-        - python ${{ python_min }}.*
-    script:
-      - pip check
+      pip_check: true
 
 about:
   summary: Utilities for implementing Modified Preorder Tree Traversal with your Django Models and working with trees of Model instances.
